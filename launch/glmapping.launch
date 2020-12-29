@@ -1,0 +1,40 @@
+<launch>
+    <param name ="/use_sim_time" value="true"/>
+<!--Input######################################################################################################-->
+    <node pkg="rosbag" type="play" name="rosbag" args="$(find glmapping)/bag/xtion2.bag --clock"
+        launch-prefix="bash -c 'sleep 2; $0 $@' ">
+    </node>
+
+<!--rviz#######################################################################################################-->
+<!--    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find glmapping)/launch/config/glmapping.rviz" />-->
+
+<!--glmapping##################################################################################################-->
+    <arg name="node_start_delay"  default="1.0" />
+    <param name="/glmapping_configfile" type="string" value="$(find glmapping)/launch/config/config.yaml"/>
+
+    <!-- Manager -->
+    <node pkg="nodelet" type="nodelet"
+          name="glmapping_nodelet_manager" args="manager" output="screen">
+          <param name="num_worker_threads" value="2" />
+    </node>
+
+    <node pkg="nodelet" type="nodelet" args="load glmapping/LocalMapNodeletClass glmapping_nodelet_manager"
+        name="glmapping_LocalMapNodeletClass_loader" output="screen"
+        launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
+        <remap from="/glmapping/pc"          to="/camera/depth/points"/>
+        <remap from="/glmapping/pose"        to="/vrpn_client_node/xtion2/pose"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" args="load glmapping/GlobalMapNodeletClass glmapping_nodelet_manager"
+        name="glmapping_GlobalMapNodeletClass_loader" output="screen"
+        launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
+    </node>
+
+</launch>
+
+
+
+
+
+
+

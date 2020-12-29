@@ -1,0 +1,17 @@
+<library path="lib/libglmapping">
+
+        <class name="glmapping/LocalMapNodeletClass" type="glmapping_ns::LocalMapNodeletClass"
+		base_class_type="nodelet::Nodelet">
+		<description>
+                        LocalMapNodeletClass
+		</description>
+	</class>
+
+        <class name="glmapping/GlobalMapNodeletClass" type="glmapping_ns::GlobalMapNodeletClass"
+		base_class_type="nodelet::Nodelet">
+		<description>
+                        GlobalMapNodeletClass
+		</description>
+	</class>
+
+</library>
