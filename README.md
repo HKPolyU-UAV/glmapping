@@ -11,7 +11,7 @@ This mapping kit is a 3D occupancy voxel map designed for the MAV/mobile robot n
 Clone this repository to catkin src folder say: ~/catkin_ws/src
 ````
 cd ~/catkin_ws/src
-git clone https://github.com/Ttoto/glmapping.git
+git clone https://github.com/HKPolyU-UAV/glmapping.git
 ````
 Install 3rd Part library
 ````
